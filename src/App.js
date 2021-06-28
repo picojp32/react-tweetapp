@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 import AppContext from "./context/AppContext";
-import {Router, Route, Switch} from "react-router-dom"
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './App.css';
 import Tweet from './components/Tweet';
 import Users from './components/Users'
