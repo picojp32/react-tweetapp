@@ -20,7 +20,8 @@ const Users = () => {
 
   return(
     <div className="user-container">
-      <h1 className="profile-title">Profile</h1>
+      <p className="profile-title">Profile</p>
+      <p className="user-title">User Name</p>
       <input
         type="Text"
         value={newUser}

@@ -43,14 +43,7 @@ const Tweet = () => {
         setIsLoading(false);
     },[500])
   };
-  useEffect (() =>{
-    if(!appContext.user && !tweetData.text) {
-      setIsDisabled(true);
-    } else{
-      setIsDisabled(false)
-    }
-  }, [appContext, tweetData]);
-  
+   
   useEffect(() => {
     setIsLoading(true); 
     fetch("https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet")
@@ -63,42 +56,49 @@ const Tweet = () => {
     setIsLoading(false);
   }, [appContext.user]); 
 
-
+  useEffect (() =>{
+    if(!appContext.user && !tweetData.text) {
+      setIsDisabled(true);
+    } else{
+      setIsDisabled(false)
+    }
+  }, [appContext, tweetData]);
 
   useEffect(() => {
     if (text.length < maxLength) {
       setIsDisabled(false);
     } else {
-      setIsDisabled(true);
-      alert("The tweet can't contain more then 140 chars.")  
-    }
+      window.confirm("The tweet can't contain more then 140 chars.")  
+    } 
   }, [text.length]);
 
   return (
 
-    <form className="form-container">
+    <form>
+      <div className="form-container">
       <textarea
         disabled={isDisabled}
         rows='10'
-        cols='100'
+        cols='90'
         name='text'
         className='tweet'
         value={text}
         maxLength= {maxLength}
-        placeholder='Enter tweet...'
+        placeholder='What you have in mind...'
         onInput={textHandler}
       />
-   {!isLoading && (
-      <button
-        onClick={handleClick}
-        disabled={isDisabled}
-        type="submit"
-        className={`submit-button submit-button-${isDisabled}`}>
-        Tweet
-      </button>
-    )}
-    {isLoading && <Loader />}
-    <List tweetData={tweetData} />
+      {!isLoading && (
+        <button
+          onClick={handleClick}
+          disabled={isDisabled}
+          type="submit"
+          className={`submit-button submit-button-${isDisabled}`}>
+          Tweet
+        </button>
+      )}
+      {isLoading && <Loader />}
+      <List tweetData={tweetData} />
+    </div>
     </form> 
   ); 
 }
