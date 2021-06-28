@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
-import { Route } from 'react-router';
+import {Redirect} from "react-router-dom"
 import "../App.css"
 import AppContext from '../context/AppContext';
-import Tweet from './Tweet';
 
 const Users = () => {
   const appContext = useContext(AppContext);
   const [newUser, setNewUser] = useState('')
+  const [isRedirect, setIsRedirect] = useState(false);
 
   const newUserHandler = (e) => {
     setNewUser(e.target.value);
@@ -14,8 +14,8 @@ const Users = () => {
 
   const userHandler = () => {
     appContext.setUser(newUser);
-    <Route exact path="/" component={Tweet}/>
     setNewUser('')
+    setIsRedirect(true);
   };
 
   return(
@@ -34,7 +34,8 @@ const Users = () => {
         onClick={userHandler}
         className='save-button'>
         Save
-      </button> 
+      </button>
+      { isRedirect && <Redirect to='/' />} 
     </div>
   )
 
